@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BisinessInformation extends Model
+class OrgBisinessInfor extends Model
 {
     use HasFactory;
     protected $fillable=['ocop_id'];
-    public function orgBasicInfor(){
+    public function basicInformation(){
         return $this->hasOne(OrgBasicInfor::class);
     }
     public function Detail(){
