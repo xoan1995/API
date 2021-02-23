@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     use HasFactory;
-    protected $fillable=['người liên hệ','sđt 1','sđt 2','email','địa chỉ','trạng thái','bisinessInformation_id'];
+    protected $fillable=['org_bisiness_infor_id'];
     public function bisinessInformation(){
         return $this->belongsTo(BisinessInformation::class);
     }

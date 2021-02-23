@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class InformationCareerNewsMedia extends Model
 {
     use HasFactory;
-    protected $fillabbe=['basicInformation_id','career_id','news_id','media_id'];
+    protected $fillabbe=['org_basic_infor_id','career_id','news_id','media_id'];
 }

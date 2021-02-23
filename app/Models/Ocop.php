@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ocop extends Model
 {
     use HasFactory;
-    public function OrgBisinessInfors(){
+    public function orgBisinessInfors(){
         return $$this->hasMany(OrgBisinessInfor::class);
     }
 }
