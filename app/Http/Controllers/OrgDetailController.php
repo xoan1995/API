@@ -14,7 +14,9 @@ class OrgDetailController extends Controller
      */
     public function index()
     {
-        //
+        $details =OrgDetail::all()->toJson(JSON_PRETTY_PRINT);
+        dd($details);
+        return response($details, 200);
     }
 
     /**

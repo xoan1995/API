@@ -14,7 +14,9 @@ class OrgMajorsController extends Controller
      */
     public function index()
     {
-        //
+        $majors =OrgMajors::all()->toJson(JSON_PRETTY_PRINT);
+        dd($majors);
+        return response($majors, 200);
     }
 
     /**

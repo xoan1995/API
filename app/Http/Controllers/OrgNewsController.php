@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrgNews;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
 
 class OrgNewsController extends Controller
 {
@@ -14,7 +15,9 @@ class OrgNewsController extends Controller
      */
     public function index()
     {
-        //
+        $allNews = OrgNews::all()->toJson(JSON_PRETTY_PRINT);
+        dd($allNews);
+      return response($allNews, 200);
     }
 
     /**

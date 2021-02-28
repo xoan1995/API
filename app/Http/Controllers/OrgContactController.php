@@ -14,7 +14,9 @@ class OrgContactController extends Controller
      */
     public function index()
     {
-        //
+        $contacts =OrgContact::all()->toJson(JSON_PRETTY_PRINT);
+        dd($contacts);
+        return response($contacts, 200);
     }
 
     /**

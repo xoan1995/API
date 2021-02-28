@@ -14,7 +14,9 @@ class OrgBasicInforController extends Controller
      */
     public function index()
     {
-        //
+        $basicInfors =OrgBasicInfor::all()->toJson(JSON_PRETTY_PRINT);
+        dd($basicInfors);
+        return response($basicInfors, 200);
     }
 
     /**

@@ -14,7 +14,9 @@ class OrgMediaController extends Controller
      */
     public function index()
     {
-        //
+        $medias = OrgMedia::all()->toJson(JSON_PRETTY_PRINT);
+        dd($medias);
+      return response($medias, 200);
     }
 
     /**

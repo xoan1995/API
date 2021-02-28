@@ -14,7 +14,9 @@ class OrgBisinessInforController extends Controller
      */
     public function index()
     {
-        //
+        $bisinessInfors =OrgBisinessInfor::all()->toJson(JSON_PRETTY_PRINT);
+        dd($bisinessInfors);
+        return response($bisinessInfors, 200);
     }
 
     /**
