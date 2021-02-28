@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\District;
 use Illuminate\Database\Seeder;
 
 class DistrictSeeder extends Seeder
@@ -13,6 +14,6 @@ class DistrictSeeder extends Seeder
      */
     public function run()
     {
-        //
+        District::factory()->times(30)->create();
     }
 }

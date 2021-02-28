@@ -8,12 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class District extends Model
 {
     use HasFactory;
-    protected $fillable=['name','city_id'];
-    public function wards(){
-        return $this->hasMany(Ward::class);
-    }
-
-    public function city(){
-        return $this->belongsTo(City::class);
-    }
+    protected $fillable=['code','name','name_short','name_slug','province_id'];  
 }

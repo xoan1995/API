@@ -1,15 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
-class Ward extends Model
+class Ward extends Controller
 {
-    use HasFactory;
-    protected $fillable=['name','district_id'];
-    public function district(){
-        return $this->belongsTo(District::class);
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function __invoke(Request $request)
+    {
+        //
     }
 }

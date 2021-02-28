@@ -22,7 +22,11 @@ class DistrictFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'code' => $this->faker->numberBetween(10000,99999),
+            'name' => $this->faker->city(),
+            'name_short'=> $this->faker->state(),
+            'name_slug' => $this->faker->stateAbbr(),
+            'province_code'=> $this->faker->numberBetween(10000,99999),
         ];
     }
 }
