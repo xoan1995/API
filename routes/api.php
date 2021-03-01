@@ -20,9 +20,80 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::prefix('/provinces')->group(function(){
     Route::get('/', 'App\Http\Controllers\ProvinceController@getAllProvinces');
-    Route::get('{id}', 'Api\ProvinceController@getProvince');
-    Route::post('create', 'Api\Http\Controllers\ProvinceController@createProvince');
+    Route::get('{id}', 'App\Http\Controllers\ProvinceController@getProvince');
+    Route::post('create', 'App\Http\Controllers\ProvinceController@createProvince');
     Route::put('{id}/update', 'App\Http\Controllers\ProvinceController@updateProvince');
-    Route::delete('{id}/delete','App\Http\Controllers\ProvinceController@deleteBook');
+    Route::delete('{id}/delete','App\Http\Controllers\ProvinceController@destroy');
 });
-Route::get('provinces', 'App\Http\Controllers\ProvinceController@getAllProvinces');
+
+Route::prefix('/districts')->group(function(){
+    Route::get('/', 'App\Http\Controllers\DistrictController@getAllDistricts');
+    Route::get('{id}', 'App\Http\Controllers\DistrictController@getDistrict');
+    Route::post('create', 'App\Http\Controllers\DistrictController@createDistrict');
+    Route::put('{id}/update', 'App\Http\Controllers\DistrictController@updateDistrict');
+    Route::delete('{id}/delete','App\Http\Controllers\DistrictController@deleteDistrict');
+});
+
+Route::prefix('/wards')->group(function(){
+    Route::get('/', 'App\Http\Controllers\WardController@getAllWards');
+    Route::get('{id}', 'App\Http\Controllers\WardController@getWard');
+    Route::post('create', 'App\Http\Controllers\WardController@createWard');
+    Route::put('{id}/update', 'App\Http\Controllers\WardController@updateWard');
+    Route::delete('{id}/delete','App\Http\Controllers\WardController@deleteWard');
+});
+
+Route::prefix('/orgBisinessInfors')->group(function(){
+    Route::get('/', 'App\Http\Controllers\OrgBisinessInforController@getAllOrgBisinessInfors');
+    Route::get('{id}', 'App\Http\Controllers\OrgBisinessInforController@getOrgBisinessInfor');
+    Route::post('create', 'App\Http\Controllers\OrgBisinessInforController@createOrgBisinessInfor');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgBisinessInforController@updateOrgBisinessInfor');
+    Route::delete('{id}/delete','App\Http\Controllers\OrgBisinessInforController@deleteOrgBisinessInfor');
+});
+
+Route::prefix('/orgBasicInfors')->group(function(){
+    Route::get('/', 'App\Http\Controllers\OrgBasicInforController@getAllOrgBasicInfors');
+    Route::get('{id}', 'App\Http\Controllers\OrgBasicInforController@getOrgBasicInfor');
+    Route::post('create', 'App\Http\Controllers\OrgBasicInforController@createOrgBasicInfor');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgBasicInforController@updateOrgBasicInfor');
+    Route::delete('{id}/delete','App\Http\Controllers\OrgBasicInforController@deleteOrgBasicInfor');
+});
+
+Route::prefix('/orgContacts')->group(function(){
+    Route::get('/', 'App\Http\Controllers\OrgContactController@getAllOrgContacts');
+    Route::get('{id}', 'App\Http\Controllers\OrgContactController@getOrgContact');
+    Route::post('create', 'App\Http\Controllers\OrgContactController@createOrgContact');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgContactController@updateOrgContact');
+    Route::delete('{id}/delete','App\Http\Controllers\OrgContactController@deleteOrgContact');
+});
+
+Route::prefix('/orgDetails')->group(function(){
+    Route::get('/', 'App\Http\Controllers\OrgDetailController@getAllOrgDetails');
+    Route::get('{id}', 'App\Http\Controllers\OrgDetailController@getOrgDetail');
+    Route::post('create', 'App\Http\Controllers\OrgDetailController@createOrgDetail');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgDetailController@updateOrgDetail');
+    Route::delete('{id}/delete','App\Http\Controllers\OrgDetailController@deleteOrgDetail');
+});
+
+Route::prefix('/orgMajors')->group(function(){
+    Route::get('/', 'App\Http\Controllers\OrgMajorController@getAllOrgMajors');
+    Route::get('{id}', 'App\Http\Controllers\OrgMajorController@getOrgMajor');
+    Route::post('create', 'App\Http\Controllers\OrgMajorController@createOrgMajor');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgMajorController@updateOrgMajor');
+    Route::delete('{id}/delete','App\Http\Controllers\OrgMajorController@deleteOrgMajor');
+});
+
+Route::prefix('/orgMedias')->group(function(){
+    Route::get('/', 'App\Http\Controllers\OrgMediaController@getAllOrgMedias');
+    Route::get('{id}', 'App\Http\Controllers\OrgMediaController@getOrgMedia');
+    Route::post('create', 'App\Http\Controllers\OrgMediaController@createOrgMedia');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgMediaController@updateOrgMedia');
+    Route::delete('{id}/delete','App\Http\Controllers\OrgMediaController@deleteOrgMedia');
+});
+
+Route::prefix('/orgNews')->group(function(){
+    Route::get('/', 'App\Http\Controllers\OrgNewController@getAllOrgNews');
+    Route::get('{id}', 'App\Http\Controllers\OrgNewController@getOrgNew');
+    Route::post('create', 'App\Http\Controllers\OrgNewController@createOrgNew');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgNewController@updateOrgNew');
+    Route::delete('{id}/delete','App\Http\Controllers\OrgNewController@deleteOrgNew');
+});

@@ -60,12 +60,14 @@ class ProvinceController extends Controller
     {
         if (Province::where('id', $id)->exists()) {
             $province = Province::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            dd($province);
             return response($province, 200);
           } else {
             return response()->json([
               "message" => "Province not found"
             ], 404);
           }
+          
     }
 
     /**
@@ -114,18 +116,10 @@ class ProvinceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Province $id)
-    {
-        if(Province::where('id', $id)->exists()) {
-            $province = Province::find($id);
-            $province->delete();
-    
-            return response()->json([
-              "message" => "records deleted"
-            ], 202);
-          } else {
-            return response()->json([
-              "message" => "Province not found"
-            ], 404);
-          }
+    {   $province = Province::findOrFail($id);
+        $province->delete();
+        return response()->json([
+            'message'=>'Province deleted !'
+        ],404);
     }
 }
