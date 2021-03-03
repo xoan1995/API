@@ -22,7 +22,10 @@ class OrgNewsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'code' => $this->faker->numberBetween(10000, 99999),
+            'name' => $this->faker->city(),
+            'name_slug' => $this->faker->firstName(),
+            'is_active' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

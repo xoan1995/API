@@ -12,9 +12,9 @@ class OrgContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllOrgContacts()
     {
-        $contacts =OrgContact::all()->toJson(JSON_PRETTY_PRINT);
+        $contacts = OrgContact::all()->toJson(JSON_PRETTY_PRINT);
         dd($contacts);
         return response($contacts, 200);
     }
@@ -24,7 +24,7 @@ class OrgContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createForm()
     {
         //
     }
@@ -35,9 +35,20 @@ class OrgContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createOrgContact(Request $request)
     {
-        //
+        $orgContact = new OrgContact();
+        $orgContact->contact = $request->contact;
+        $orgContact->phone_1 = $request->phone_1;
+        $orgContact->phone_2 = $request->phone_2;
+        $orgContact->email = $request->email;
+        $orgContact->address = $request->address;
+        $orgContact->status = $request->status;
+        $orgContact->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+        $orgContact->save();
+        return response()->json([
+            "message" => "Created"
+        ], 201);
     }
 
     /**
@@ -46,9 +57,16 @@ class OrgContactController extends Controller
      * @param  \App\Models\OrgContact  $orgContact
      * @return \Illuminate\Http\Response
      */
-    public function show(OrgContact $orgContact)
+    public function getOrgContact($id)
     {
-        //
+        if (OrgContact::where('id', $id)->exists()) {
+            $orgContact = OrgContact::findOrFail($id)->toJson(JSON_PRETTY_PRINT);
+            return response($orgContact, 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found'
+            ], 404);
+        }
     }
 
     /**
@@ -57,7 +75,7 @@ class OrgContactController extends Controller
      * @param  \App\Models\OrgContact  $orgContact
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrgContact $orgContact)
+    public function editForm(OrgContact $orgContact)
     {
         //
     }
@@ -69,9 +87,27 @@ class OrgContactController extends Controller
      * @param  \App\Models\OrgContact  $orgContact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrgContact $orgContact)
+    public function updateOrgContact(Request $request, $id)
     {
-        //
+        if (OrgContact::where('id', $id)->exists()) {
+            $orgContact = OrgContact::findOrFail($id);
+            $orgContact->contact = $request->contact;
+            $orgContact->phone_1 = $request->phone_1;
+            $orgContact->phone_2 = $request->phone_2;
+            $orgContact->email = $request->email;
+            $orgContact->address = $request->address;
+            $orgContact->status = $request->status;
+            $orgContact->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+            $orgContact->save();
+
+            return response()->json([
+                'message' => 'Updated!'
+            ], 202);
+        } else {
+            return response()->json([
+                'message' => 'Not found'
+            ], 404);
+        }
     }
 
     /**
@@ -80,8 +116,19 @@ class OrgContactController extends Controller
      * @param  \App\Models\OrgContact  $orgContact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrgContact $orgContact)
+    public function deleteOrgContact($id)
     {
-        //
+        if (OrgContact::where('id', $id)->exists()) {
+            $orgContact = OrgContact::findOrFail($id);
+            $orgContact->delete();
+
+            return response()->json([
+                'message' => 'Deleted!'
+            ], 202);
+        } else {
+            return response()->json([
+                'message' => 'Not found'
+            ], 404);
+        }
     }
 }

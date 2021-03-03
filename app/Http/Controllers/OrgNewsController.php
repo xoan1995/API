@@ -13,10 +13,9 @@ class OrgNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllOrgNews()
     {
         $allNews = OrgNews::all()->toJson(JSON_PRETTY_PRINT);
-        dd($allNews);
       return response($allNews, 200);
     }
 

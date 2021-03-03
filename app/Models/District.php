@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class District extends Model
 {
     use HasFactory;
-    protected $fillable=['code','name','name_short','name_slug','province_id'];  
+    protected $fillable=['code','name','name_short','name_slug','province_id','is_active'];  
 }

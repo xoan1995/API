@@ -12,10 +12,9 @@ class OrgBisinessInforController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllOrgBisinessInfor()
     {
-        $bisinessInfors =OrgBisinessInfor::all()->toJson(JSON_PRETTY_PRINT);
-        dd($bisinessInfors);
+        $bisinessInfors = OrgBisinessInfor::all()->toJson(JSON_PRETTY_PRINT);
         return response($bisinessInfors, 200);
     }
 
@@ -24,9 +23,16 @@ class OrgBisinessInforController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getOrgBisinessInfor($id)
     {
-        //
+        if (OrgBisinessInfor::where('id', $id)->exists()) {
+            $orgBisinessInfor = OrgBisinessInfor::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($orgBisinessInfor, 200);
+        } else {
+            return response()->json([
+                "message" => "OrgBisinessInfor not found"
+            ], 404);
+        }
     }
 
     /**
@@ -35,9 +41,14 @@ class OrgBisinessInforController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function  createOrgBisinessInfor(Request $request)
     {
-        //
+        $orgBisinessInfor = new OrgBisinessInfor();
+        $orgBisinessInfor->name = $request->name;
+        $orgBisinessInfor->save();
+        return response()->json([
+            "message" => "Created"
+        ], 201);
     }
 
     /**
@@ -69,9 +80,21 @@ class OrgBisinessInforController extends Controller
      * @param  \App\Models\OrgBisinessInfor  $orgBisinessInfor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrgBisinessInfor $orgBisinessInfor)
+    public function updateOrgBisinessInfor(Request $request, $id)
     {
-        //
+        if (OrgBisinessInfor::where('id', $id)->exists()) {
+            $orgBisinessInfor = OrgBisinessInfor::findOrFail($id);
+            $orgBisinessInfor->name = $request->name;
+            $orgBisinessInfor->save();
+
+            return response()->json([
+                'mesage' => 'records updated successfully'
+            ], 202);
+        } else {
+            return response()->json([
+                "message" => "OrgBisinessInfor not found"
+            ], 404);
+        }
     }
 
     /**
@@ -80,8 +103,19 @@ class OrgBisinessInforController extends Controller
      * @param  \App\Models\OrgBisinessInfor  $orgBisinessInfor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrgBisinessInfor $orgBisinessInfor)
+    public function deleteOrgBisinessInfor($id)
     {
-        //
+        if (OrgBisinessInfor::where('id', $id)->exists()) {
+            $orgBisinessInfor = OrgBisinessInfor::findOrFail($id);
+            $orgBisinessInfor->delete();
+
+            return response()->json([
+                'message' => 'Deleted'
+            ]);
+        } else {
+            return response([
+                'message' => 'not found!'
+            ]);
+        }
     }
 }

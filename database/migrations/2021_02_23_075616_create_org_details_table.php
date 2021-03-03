@@ -18,7 +18,7 @@ class CreateOrgDetailsTable extends Migration
             $table->longText('description');
             $table->longText('about');
             $table->unsignedBigInteger('org_bisiness_infor_id');
-            $table->foreign('org_bisiness_infor_id')->references('id')->on('org_bisiness_Infors')->onDelete('cascade');
+            $table->foreign('org_bisiness_infor_id')->references('id')->on('org_bisiness_infors')->onDelete('cascade');
             $table->timestamps();
         });
     }

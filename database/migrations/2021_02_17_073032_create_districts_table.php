@@ -15,10 +15,14 @@ class CreateDistrictsTable extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->integer('code');           
+            $table->string('name',50);
+            $table->string('name_short',50);
+            $table->string('name_slug',50);
+            $table->integer('province_code');
+            $table->tinyInteger('is_active')->length(1);
             $table->timestamps();
+            $table->softDeletes('delete_at',$precision=0);
         });
     }
 

@@ -12,9 +12,9 @@ class DistrictController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllDistricts()
     {
-        $districts =District::all()->toJson(JSON_PRETTY_PRINT);
+        $districts = District::all()->toJson(JSON_PRETTY_PRINT);
         dd($districts);
         return response($districts, 200);
     }
@@ -24,9 +24,19 @@ class DistrictController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createDistrict(Request $request)
     {
-        //
+        $district = new District();
+        $district->code = $request->code;
+        $district->name = $request->name;
+        $district->name_short = $request->name_slug;
+        $district->name_slug = $request->name_slug;
+        $district->province_code = $request->province_code;
+        $district->is_active = $request->is_active;
+        $district->save();
+        return response()->json([
+            "message" => "District record created"
+        ], 201);
     }
 
     /**
@@ -46,9 +56,16 @@ class DistrictController extends Controller
      * @param  \App\Models\District  $district
      * @return \Illuminate\Http\Response
      */
-    public function show(District $district)
+    public function getDistrict($id)
     {
-        //
+        if (District::where('id', $id)->exists()) {
+            $district = District::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($district, 200);
+        } else {
+            return response()->json([
+                "message" => "District not found"
+            ], 404);
+        }
     }
 
     /**
@@ -57,9 +74,9 @@ class DistrictController extends Controller
      * @param  \App\Models\District  $district
      * @return \Illuminate\Http\Response
      */
-    public function edit(District $district)
+    public function edit($id)
     {
-        //
+        //    
     }
 
     /**
@@ -69,9 +86,25 @@ class DistrictController extends Controller
      * @param  \App\Models\District  $district
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, District $district)
+    public function updateDistrict(Request $request, $id)
     {
-        //
+        if (District::where('id', $id)->exists()) {
+            $district = District::findOrFail($id);
+            $district->code = $request->code;
+            $district->name = $request->name;
+            $district->name_short = $request->name_short;
+            $district->name_slug = $request->name_slug;
+            $district->province_code = $request->province_code;
+            $district->is_active = $request->is_active;
+            $district->save();
+            return response()->json([
+                "message" => "records updated successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "district not found"
+            ], 404);
+        }
     }
 
     /**
@@ -80,8 +113,12 @@ class DistrictController extends Controller
      * @param  \App\Models\District  $district
      * @return \Illuminate\Http\Response
      */
-    public function destroy(District $district)
+    public function deleteDistrict($id)
     {
-        //
+        $district = District::findOrFail($id);
+        $district->delete();
+        return response()->json([
+            'message' => 'District deleted !'
+        ], 202);
     }
 }

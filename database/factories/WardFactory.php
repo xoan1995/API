@@ -28,6 +28,7 @@ class WardFactory extends Factory
             'name_slug' => $this->faker->stateAbbr(),
             'district_code'=> $this->faker->numberBetween(10000,99999),
             'province_code'=> $this->faker->numberBetween(10000,99999),
+            'is_active'=> $this->faker->numberBetween(1,10),
         ];
     }
 }

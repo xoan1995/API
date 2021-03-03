@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class OrgBisinessInfor extends Model
 {
     use HasFactory;
-    protected $fillable=['ocop_id'];
-    public function basicInformation(){
+    protected $fillable=['name'];
+    public function basicInfor(){
         return $this->hasOne(OrgBasicInfor::class);
     }
-    public function Detail(){
+    public function detail(){
         return $this->hasOne(OrgDetail::class);
     }
     public function contacts(){
@@ -23,8 +23,5 @@ class OrgBisinessInfor extends Model
     }
     public function medias(){
         return $this->hasMany(OrgMedia::class);
-    }
-    public function ocop(){
-        return $this->belongsTo(Ocop::class);
     }
 }

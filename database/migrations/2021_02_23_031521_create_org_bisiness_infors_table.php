@@ -15,8 +15,7 @@ class CreateOrgBisinessInforsTable extends Migration
     {
         Schema::create('org_bisiness_infors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('ocop_id');
-            $table->foreign('ocop_id')->references('id')->on('ocops')->onDelete('cascade');
+            $table->string('name');
             $table->timestamps();
         });
     }

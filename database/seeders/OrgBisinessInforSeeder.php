@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrgBisinessInfor;
 use Illuminate\Database\Seeder;
 
 class OrgBisinessInforSeeder extends Seeder
@@ -13,6 +14,6 @@ class OrgBisinessInforSeeder extends Seeder
      */
     public function run()
     {
-        //
+        OrgBisinessInfor::factory()->time(30)->create();
     }
 }

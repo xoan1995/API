@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrgDetail;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
 class OrgDetailController extends Controller
@@ -12,9 +13,9 @@ class OrgDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllOrgDetails()
     {
-        $details =OrgDetail::all()->toJson(JSON_PRETTY_PRINT);
+        $details = OrgDetail::all()->toJson(JSON_PRETTY_PRINT);
         dd($details);
         return response($details, 200);
     }
@@ -24,7 +25,7 @@ class OrgDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createForm()
     {
         //
     }
@@ -35,9 +36,17 @@ class OrgDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createOrgDetail(Request $request)
     {
-        //
+        $orgDetail = new OrgDetail();
+        $orgDetail->description = $request->description;
+        $orgDetail->about = $request->about;
+        $orgDetail->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+        $orgDetail->save();
+
+        return response()->json([
+            "message" => "Created"
+        ], 201);
     }
 
     /**
@@ -46,20 +55,16 @@ class OrgDetailController extends Controller
      * @param  \App\Models\OrgDetail  $orgDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(OrgDetail $orgDetail)
+    public function getOrgDetail($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OrgDetail  $orgDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrgDetail $orgDetail)
-    {
-        //
+        if (OrgDetail::where('id', $id)->exists()) {
+            $orgDetail = OrgDetail::findOrFail($id)->toJson(JSON_PRETTY_PRINT);
+            return response($orgDetail, 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found'
+            ], 404);
+        }
     }
 
     /**
@@ -69,9 +74,23 @@ class OrgDetailController extends Controller
      * @param  \App\Models\OrgDetail  $orgDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrgDetail $orgDetail)
+    public function updateOrgDetail(Request $request, $id)
     {
-        //
+        if (OrgDetail::where('id', $id)->exists()) {
+            $orgDetail = OrgDetail::findOrFail($id);
+            $orgDetail->description = $request->description;
+            $orgDetail->about = $request->about;
+            $orgDetail->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+            $orgDetail->save();
+
+            return response()->json([
+                'message' => 'Updated!'
+            ], 202);
+        } else {
+            return response()->json([
+                'message' => 'Not found'
+            ], 404);
+        }
     }
 
     /**
@@ -80,8 +99,19 @@ class OrgDetailController extends Controller
      * @param  \App\Models\OrgDetail  $orgDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrgDetail $orgDetail)
+    public function deleteOrgDetail($id)
     {
-        //
+        if (OrgDetail::where('id', $id)->exists()) {
+            $orgDetail = OrgDetail::findOrFail($id);
+            $orgDetail->delete();
+
+            return response()->json([
+                'message' => 'Deleted!'
+            ], 202);
+        } else {
+            return response()->json([
+                'message' => 'Not found'
+            ], 404);
+        }
     }
 }

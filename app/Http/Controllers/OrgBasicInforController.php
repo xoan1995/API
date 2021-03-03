@@ -69,9 +69,34 @@ class OrgBasicInforController extends Controller
      * @param  \App\Models\OrgBasicInfor  $orgBasicInfor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrgBasicInfor $orgBasicInfor)
+    public function update(Request $request, $id)
     {
-        //
+        if(OrgBasicInfor::where('id',$id)->exists()){
+            $orgBasicInfor = OrgBasicInfor::findOrFail($id);
+            $orgBasicInfor ->name= $request->name;
+            $orgBasicInfor ->name_en= $request->name_en;
+            $orgBasicInfor ->code_tax= $request->code_tax;
+            $orgBasicInfor ->address= $request->address;
+            $orgBasicInfor ->province_id= $request->province_id;
+            $orgBasicInfor ->district_id= $request->district_id;
+            $orgBasicInfor ->representative= $request->representative;
+            $orgBasicInfor ->phone= $request->phone;
+            $orgBasicInfor ->email= $request->email;
+            $orgBasicInfor ->civil_scale= $request->civil_scale;
+            $orgBasicInfor ->founding= $request->founding;
+            $orgBasicInfor ->org_created= $request->org_created;
+            $orgBasicInfor ->status= $request->status;
+            $orgBasicInfor ->org_bisiness_infor_id= $request->org_bisiness_infor_id;
+            $orgBasicInfor->save();
+
+            return response()->json([
+                'message'=>'deleted'
+            ],202);
+        }else{
+            return response()->json([
+                'message'=>'not found'
+            ],404);
+        }
     }
 
     /**
@@ -80,8 +105,19 @@ class OrgBasicInforController extends Controller
      * @param  \App\Models\OrgBasicInfor  $orgBasicInfor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrgBasicInfor $orgBasicInfor)
+    public function destroy($id)
     {
-        //
+        if(OrgBasicInfor::where('id',$id)->exists()){
+            $orgBasicInfor = OrgBasicInfor::findOrFail($id);
+            $orgBasicInfor->delete();
+
+            return response()->json([
+                'message'=>'deleted'
+            ],202);
+        }else{
+            return response()->json([
+                'message'=>'not found'
+            ],404);
+        }
     }
 }

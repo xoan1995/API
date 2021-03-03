@@ -15,10 +15,15 @@ class CreateWardsTable extends Migration
     {
         Schema::create('wards', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->unsignedBigInteger('district_id');
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->integer('code');           
+            $table->string('name',50);
+            $table->string('name_short',50);
+            $table->string('name_slug',50);
+            $table->integer('district_code');
+            $table->integer('province_code');
+            $table->tinyInteger('is_active')->length(1);
             $table->timestamps();
+            $table->softDeletes('delete_at',$precision=0);
         });
     }
 

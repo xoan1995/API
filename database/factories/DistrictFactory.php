@@ -27,6 +27,7 @@ class DistrictFactory extends Factory
             'name_short'=> $this->faker->state(),
             'name_slug' => $this->faker->stateAbbr(),
             'province_code'=> $this->faker->numberBetween(10000,99999),
+            'is_active'=> $this->faker->numberBetween(1,10),
         ];
     }
 }
