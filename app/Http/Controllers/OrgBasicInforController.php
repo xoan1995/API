@@ -12,10 +12,9 @@ class OrgBasicInforController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllOrgBasicInfors()
     {
-        $basicInfors =OrgBasicInfor::all()->toJson(JSON_PRETTY_PRINT);
-        dd($basicInfors);
+        $basicInfors = OrgBasicInfor::all()->toJson(JSON_PRETTY_PRINT);
         return response($basicInfors, 200);
     }
 
@@ -24,7 +23,7 @@ class OrgBasicInforController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createForm()
     {
         //
     }
@@ -35,9 +34,28 @@ class OrgBasicInforController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createOrgBasicInfor(Request $request)
     {
-        //
+        $orgBasicInfor = new OrgBasicInfor();
+        $orgBasicInfor->name = $request->name;
+        $orgBasicInfor->name_en = $request->name_en;
+        $orgBasicInfor->code_tax = $request->code_tax;
+        $orgBasicInfor->address = $request->address;
+        $orgBasicInfor->province_id = $request->province_id;
+        $orgBasicInfor->district_id = $request->district_id;
+        $orgBasicInfor->ward_id = $request->ward_id;
+        $orgBasicInfor->representative = $request->representative;
+        $orgBasicInfor->phone = $request->phone;
+        $orgBasicInfor->email = $request->email;
+        $orgBasicInfor->civil_scale = $request->civil_scale;
+        $orgBasicInfor->founding = $request->founding;
+        $orgBasicInfor->org_created = $request->org_created;
+        $orgBasicInfor->status = $request->status;
+        $orgBasicInfor->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+        $orgBasicInfor->save();
+        return response()->json([
+            "message" => "Created"
+        ], 201);
     }
 
     /**
@@ -71,31 +89,31 @@ class OrgBasicInforController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(OrgBasicInfor::where('id',$id)->exists()){
+        if (OrgBasicInfor::where('id', $id)->exists()) {
             $orgBasicInfor = OrgBasicInfor::findOrFail($id);
-            $orgBasicInfor ->name= $request->name;
-            $orgBasicInfor ->name_en= $request->name_en;
-            $orgBasicInfor ->code_tax= $request->code_tax;
-            $orgBasicInfor ->address= $request->address;
-            $orgBasicInfor ->province_id= $request->province_id;
-            $orgBasicInfor ->district_id= $request->district_id;
-            $orgBasicInfor ->representative= $request->representative;
-            $orgBasicInfor ->phone= $request->phone;
-            $orgBasicInfor ->email= $request->email;
-            $orgBasicInfor ->civil_scale= $request->civil_scale;
-            $orgBasicInfor ->founding= $request->founding;
-            $orgBasicInfor ->org_created= $request->org_created;
-            $orgBasicInfor ->status= $request->status;
-            $orgBasicInfor ->org_bisiness_infor_id= $request->org_bisiness_infor_id;
+            $orgBasicInfor->name = $request->name;
+            $orgBasicInfor->name_en = $request->name_en;
+            $orgBasicInfor->code_tax = $request->code_tax;
+            $orgBasicInfor->address = $request->address;
+            $orgBasicInfor->province_id = $request->province_id;
+            $orgBasicInfor->district_id = $request->district_id;
+            $orgBasicInfor->representative = $request->representative;
+            $orgBasicInfor->phone = $request->phone;
+            $orgBasicInfor->email = $request->email;
+            $orgBasicInfor->civil_scale = $request->civil_scale;
+            $orgBasicInfor->founding = $request->founding;
+            $orgBasicInfor->org_created = $request->org_created;
+            $orgBasicInfor->status = $request->status;
+            $orgBasicInfor->org_bisiness_infor_id = $request->org_bisiness_infor_id;
             $orgBasicInfor->save();
 
             return response()->json([
-                'message'=>'deleted'
-            ],202);
-        }else{
+                'message' => 'deleted'
+            ], 202);
+        } else {
             return response()->json([
-                'message'=>'not found'
-            ],404);
+                'message' => 'not found'
+            ], 404);
         }
     }
 
@@ -107,17 +125,17 @@ class OrgBasicInforController extends Controller
      */
     public function destroy($id)
     {
-        if(OrgBasicInfor::where('id',$id)->exists()){
+        if (OrgBasicInfor::where('id', $id)->exists()) {
             $orgBasicInfor = OrgBasicInfor::findOrFail($id);
             $orgBasicInfor->delete();
 
             return response()->json([
-                'message'=>'deleted'
-            ],202);
-        }else{
+                'message' => 'deleted'
+            ], 202);
+        } else {
             return response()->json([
-                'message'=>'not found'
-            ],404);
+                'message' => 'not found'
+            ], 404);
         }
     }
 }

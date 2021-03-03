@@ -12,4 +12,7 @@ class OrgNews extends Model
     public function orgBisinessInfor(){
         return $this->belongsTo(OrgBisinessInfor::class);
     }
+    public function bisinessInfors(){
+        return $this->belongsToMany(OrgBisinessInfor::class);
+    }
 }

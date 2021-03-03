@@ -12,9 +12,9 @@ class OrgMajorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllOrgMajors()
     {
-        $majors =OrgMajors::all()->toJson(JSON_PRETTY_PRINT);
+        $majors = OrgMajors::all()->toJson(JSON_PRETTY_PRINT);
         dd($majors);
         return response($majors, 200);
     }
@@ -24,7 +24,7 @@ class OrgMajorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createForm()
     {
         //
     }
@@ -35,9 +35,16 @@ class OrgMajorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createOrgMajors(Request $request)
     {
-        //
+        $orgMajors = new OrgMajors();
+        $orgMajors->list_majors = $request->list_majors;
+        $orgMajors->relation_org_majors = $request->relation_org_majors;
+        $orgMajors->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+        $orgMajors->save();
+        return response()->json([
+            "message" => "Created"
+        ], 201);
     }
 
     /**

@@ -12,4 +12,7 @@ class OrgMajors extends Model
     public function bisinessInformation(){
         return $this->belongsTo(BisinessInformation::class);
     }
+    public function basicInfors(){
+        return $this->belongsToMany(OrgBasicInfor::class);
+    }
 }

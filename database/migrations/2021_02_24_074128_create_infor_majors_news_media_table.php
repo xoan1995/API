@@ -14,19 +14,10 @@ class CreateInforMajorsNewsMediaTable extends Migration
     public function up()
     {
         Schema::create('infor_majors_news_media', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('org_basic_infor_id');
-            $table->foreign('org_basic_infor_id')->references('id')->on('org_basic_infors')->onDelete('cascade');
-           
-            $table->unsignedBigInteger('org_majors_id');
-            $table->foreign('org_majors_id')->references('id')->on('org_majors')->onDelete('cascade');
-            
-            $table->unsignedBigInteger('org_news_id');
-            $table->foreign('org_news_id')->references('id')->on('org_news')->onDelete('cascade');
-            
-            $table->unsignedBigInteger('org_media_id');
-            $table->foreign('org_media_id')->references('id')->on('org_media')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreignId('org_basic_infor_id')->constrained();
+            $table->foreignId('org_majors_id')->constrained();
+            $table->foreignId('org_news_id')->constrained();
+            $table->foreignId('org_media_id')->constrained();
         });
     }
 

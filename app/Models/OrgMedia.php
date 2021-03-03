@@ -12,7 +12,7 @@ class OrgMedia extends Model
     public function orgBisinessInfor(){
         return $this->belongsTo(OrgBisinessInfor::class);
     }
-    public function type(){
-        return $this->hasOne(Type::class);
+    public function bisinessInfors(){
+        return $this->belongsToMany(OrgBisinessInfor::class);
     }
 }

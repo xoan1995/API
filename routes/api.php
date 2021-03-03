@@ -75,11 +75,11 @@ Route::prefix('/orgDetails')->group(function () {
 });
 
 Route::prefix('/orgMajors')->group(function () {
-    Route::get('/', 'App\Http\Controllers\OrgMajorController@getAllOrgMajors');
-    Route::get('{id}', 'App\Http\Controllers\OrgMajorController@getOrgMajor');
-    Route::post('create', 'App\Http\Controllers\OrgMajorController@createOrgMajor');
-    Route::put('{id}/update', 'App\Http\Controllers\OrgMajorController@updateOrgMajor');
-    Route::delete('{id}/delete', 'App\Http\Controllers\OrgMajorController@deleteOrgMajor');
+    Route::get('/', 'App\Http\Controllers\OrgMajorsController@getAllOrgMajors');
+    Route::get('{id}', 'App\Http\Controllers\OrgMajorsController@getOrgMajors');
+    Route::post('create', 'App\Http\Controllers\OrgMajorsController@createOrgMajors');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgMajorsController@updateOrgMajors');
+    Route::delete('{id}/delete', 'App\Http\Controllers\OrgMajorsController@deleteOrgMajors');
 });
 
 Route::prefix('/orgMedias')->group(function () {

@@ -19,9 +19,9 @@ class OrgBisinessInfor extends Model
         return $this->hasMany(OrgContact::class);
     }
     public function news(){
-        return $this->hasMany(OrgNews::class);
+        return $this->belongsToMany(OrgNews::class);
     }
     public function medias(){
-        return $this->hasMany(OrgMedia::class);
+        return $this->belongsToMany(OrgMedia::class);
     }
 }
