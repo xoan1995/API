@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrgContact;
 use Illuminate\Database\Seeder;
 
 class OrgContactSeeder extends Seeder
@@ -13,6 +14,6 @@ class OrgContactSeeder extends Seeder
      */
     public function run()
     {
-        //
+        OrgContact::factory()->time(30)->create();
     }
 }

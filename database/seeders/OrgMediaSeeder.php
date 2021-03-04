@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrgMedia;
 use Illuminate\Database\Seeder;
 
 class OrgMediaSeeder extends Seeder
@@ -13,6 +14,6 @@ class OrgMediaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        OrgMedia::factory()->time(30)->create();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrgMajors;
 use Illuminate\Database\Seeder;
 
 class OrgMajorsSeeder extends Seeder
@@ -13,6 +14,6 @@ class OrgMajorsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        OrgMajors::factory()->time(30)->create();
     }
 }

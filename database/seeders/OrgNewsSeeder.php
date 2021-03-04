@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrgNews;
 use Illuminate\Database\Seeder;
 
 class OrgNewsSeeder extends Seeder
@@ -13,6 +14,6 @@ class OrgNewsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        OrgNews::factory()->time(30)->create();
     }
 }

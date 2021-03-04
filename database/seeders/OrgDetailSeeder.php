@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrgDetail;
 use Illuminate\Database\Seeder;
 
 class OrgDetailSeeder extends Seeder
@@ -13,6 +14,6 @@ class OrgDetailSeeder extends Seeder
      */
     public function run()
     {
-        //
+        OrgDetail::factory()->time(30)->create();
     }
 }
