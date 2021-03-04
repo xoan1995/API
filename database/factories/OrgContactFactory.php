@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\OrgBisinessInfor;
 use App\Models\OrgContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,13 @@ class OrgContactFactory extends Factory
     public function definition()
     {
         return [
-            //
+           'contact'=>$this->faker->text(),
+            'phone_1'=>$this->faker->e164PhoneNumber,
+            'phone_2'=>$this->faker->e164PhoneNumber,
+            'email'=>$this->faker->email,
+            'address'=>$this->faker->macAddress,
+            'status'=>$this->faker->text(),
+            'org_bisiness_infor_id'=>OrgBisinessInfor::all()->random()->id
         ];
     }
 }

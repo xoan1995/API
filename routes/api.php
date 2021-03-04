@@ -91,9 +91,9 @@ Route::prefix('/orgMedias')->group(function () {
 });
 
 Route::prefix('/orgNews')->group(function () {
-    Route::get('/', 'App\Http\Controllers\OrgNewController@getAllOrgNews');
-    Route::get('{id}', 'App\Http\Controllers\OrgNewController@getOrgNew');
-    Route::post('create', 'App\Http\Controllers\OrgNewController@createOrgNew');
-    Route::put('{id}/update', 'App\Http\Controllers\OrgNewController@updateOrgNew');
-    Route::delete('{id}/delete', 'App\Http\Controllers\OrgNewController@deleteOrgNew');
+    Route::get('/', 'App\Http\Controllers\OrgNewsController@getAllOrgNews');
+    Route::get('{id}', 'App\Http\Controllers\OrgNewsController@getOrgNews');
+    Route::post('create', 'App\Http\Controllers\OrgNewsController@createOrgNews');
+    Route::put('{id}/update', 'App\Http\Controllers\OrgNewsController@updateOrgNews');
+    Route::delete('{id}/delete', 'App\Http\Controllers\OrgNewsController@deleteOrgNews');
 });

@@ -16,7 +16,7 @@ class OrgNewsController extends Controller
     public function getAllOrgNews()
     {
         $allNews = OrgNews::all()->toJson(JSON_PRETTY_PRINT);
-      return response($allNews, 200);
+        return response($allNews, 200);
     }
 
     /**
@@ -24,7 +24,7 @@ class OrgNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createForm()
     {
         //
     }
@@ -35,9 +35,16 @@ class OrgNewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createOrgNews(Request $request)
     {
-        //
+        $orgNew = new OrgNews();
+        $orgNew->news_category = $request->news_category;
+        $orgNew->detailed_article = $request->detailed_article;
+        $orgNew->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+        $orgNew->save();
+        return response()->json([
+            "message" => "OrgNews record created"
+        ], 201);
     }
 
     /**
@@ -46,9 +53,16 @@ class OrgNewsController extends Controller
      * @param  \App\Models\OrgNews  $orgNews
      * @return \Illuminate\Http\Response
      */
-    public function show(OrgNews $orgNews)
+    public function getOrgNews($id)
     {
-        //
+        if (OrgNews::where('id', $id)->exists()) {
+            $orgNew = OrgNews::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($orgNew, 200);
+        } else {
+            return response()->json([
+                "message" => "News not found"
+            ], 404);
+        }
     }
 
     /**
@@ -57,7 +71,7 @@ class OrgNewsController extends Controller
      * @param  \App\Models\OrgNews  $orgNews
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrgNews $orgNews)
+    public function editForm(OrgNews $orgNews)
     {
         //
     }
@@ -69,9 +83,23 @@ class OrgNewsController extends Controller
      * @param  \App\Models\OrgNews  $orgNews
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrgNews $orgNews)
+    public function updateOrgNews(Request $request, $id)
     {
-        //
+        if (OrgNews::where('id', $id)->exists()) {
+            $orgNew = OrgNews::findOrFail($id);
+            $orgNew->news_category = $request->news_category;
+            $orgNew->detailed_article = $request->detailed_article;
+            $orgNew->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+            $orgNew->save();
+
+            return response()->json([
+                "message" => "records updated successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "News not found"
+            ], 404);
+        }
     }
 
     /**
@@ -80,8 +108,18 @@ class OrgNewsController extends Controller
      * @param  \App\Models\OrgNews  $orgNews
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrgNews $orgNews)
+    public function deleteOrgNews($id)
     {
-        //
+        if (OrgNews::where('id', $id)->exists()) {
+            $orgNew = OrgNews::findOrFail($id);
+            $orgNew->delete();
+            return response()->json([
+                'message' => 'News deleted !'
+            ], 202);
+        } else {
+            return response()->json([
+                "message" => "News not found"
+            ], 404);
+        }
     }
 }

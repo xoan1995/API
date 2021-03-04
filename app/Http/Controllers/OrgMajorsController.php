@@ -53,9 +53,16 @@ class OrgMajorsController extends Controller
      * @param  \App\Models\OrgMajors  $orgMajors
      * @return \Illuminate\Http\Response
      */
-    public function show(OrgMajors $orgMajors)
+    public function getOrgMajors($id)
     {
-        //
+        if (OrgMajors::where('id', $id)->exists()) {
+            $orgMajors = OrgMajors::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($orgMajors, 200);
+        } else {
+            return response()->json([
+                "message" => "OrgMajors not found"
+            ], 404);
+        }
     }
 
     /**
@@ -64,7 +71,7 @@ class OrgMajorsController extends Controller
      * @param  \App\Models\OrgMajors  $orgMajors
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrgMajors $orgMajors)
+    public function editForm(OrgMajors $orgMajors)
     {
         //
     }
@@ -76,9 +83,23 @@ class OrgMajorsController extends Controller
      * @param  \App\Models\OrgMajors  $orgMajors
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrgMajors $orgMajors)
+    public function updateOrgMajors(Request $request, $id)
     {
-        //
+        if (OrgMajors::where('id', $id)->exists()) {
+            $orgMajors = OrgMajors::findOrFail($id);
+            $orgMajors->list_majors = $request->list_majors;
+            $orgMajors->relation_org_majors = $request->relation_org_majors;
+            $orgMajors->org_bisiness_infor_id = $request->org_bisiness_infor_id;
+            $orgMajors->save();
+
+            return response()->json([
+                "message" => "records updated successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "OrgMajors not found"
+            ], 404);
+        }
     }
 
     /**
@@ -87,8 +108,18 @@ class OrgMajorsController extends Controller
      * @param  \App\Models\OrgMajors  $orgMajors
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrgMajors $orgMajors)
+    public function deleteOrgMajors($id)
     {
-        //
+        if (OrgMajors::where('id', $id)->exists()) {
+            $orgMajors = OrgMajors::findOrFail($id);
+            $orgMajors->delete();
+            return response()->json([
+                "message" => "records deleted successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "OrgMajors not found"
+            ], 404);
+        }
     }
 }
