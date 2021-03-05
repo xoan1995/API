@@ -84,8 +84,9 @@ Route::prefix('/orgMajors')->group(function () {
 
 Route::prefix('/orgMedias')->group(function () {
     Route::get('/', 'App\Http\Controllers\OrgMediaController@getAllOrgMedias');
+    Route::get('createForm', 'App\Http\Controllers\OrgMediaController@createForm');
     Route::get('{id}', 'App\Http\Controllers\OrgMediaController@getOrgMedia');
-    Route::post('create', 'App\Http\Controllers\OrgMediaController@createOrgMedia');
+    Route::post('create', 'App\Http\Controllers\OrgMediaController@createOrgMedia')->name('media.create');
     Route::put('{id}/update', 'App\Http\Controllers\OrgMediaController@updateOrgMedia');
     Route::delete('{id}/delete', 'App\Http\Controllers\OrgMediaController@deleteOrgMedia');
 });

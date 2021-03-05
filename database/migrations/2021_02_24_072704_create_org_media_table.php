@@ -22,7 +22,7 @@ class CreateOrgMediaTable extends Migration
             $table->longText('img_supple');
             $table->longText('img_certificate');
             $table->string('size');
-            $table->boolean('status');
+            $table->string('status');
             $table->unsignedBigInteger('org_bisiness_infor_id');
             $table->foreign('org_bisiness_infor_id')->references('id')->on('org_bisiness_infors')->onDelete('cascade');
             $table->timestamps();

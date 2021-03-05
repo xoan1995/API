@@ -25,7 +25,7 @@ class OrgMediaController extends Controller
      */
     public function createForm()
     {
-        //
+        return view('createForm');
     }
 
     /**
@@ -45,7 +45,7 @@ class OrgMediaController extends Controller
         $orgMedia->img_certificate = $request->img_certificate;
         $orgMedia->size = $request->size;
         $orgMedia->status = $request->status;
-        $orgMedia->org_bisiness_infor_id->$request->org_bisiness_infor_id;
+        $orgMedia->org_bisiness_infor_id = $request->org_bisiness_infor_id;
         $orgMedia->save();
         return response()->json([
             'message' => 'OrgMedia record created'
@@ -58,9 +58,16 @@ class OrgMediaController extends Controller
      * @param  \App\Models\OrgMedia  $orgMedia
      * @return \Illuminate\Http\Response
      */
-    public function getOrgMedia(OrgMedia $orgMedia)
+    public function getOrgMedia($id)
     {
-        //
+        if (OrgMedia::where('id', $id)->exists()) {
+            $orgMedia = OrgMedia::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($orgMedia, 200);
+        } else {
+            return response()->json([
+                'message' => 'Not founded!'
+            ], 404);
+        }
     }
 
     /**
@@ -84,10 +91,19 @@ class OrgMediaController extends Controller
     public function updateOrgMedia(Request $request, $id)
     {
         if (OrgMedia::where('id', $id)->exists()) {
-            $orgMedia = new OrgMedia();
+            $orgMedia = OrgMedia::findOrFail($id);
+            $orgMedia->url = $request->url;
+            $orgMedia->link = $request->link;
+            $orgMedia->logo = $request->logo;
+            $orgMedia->avatar = $request->avatar;
+            $orgMedia->img_supple = $request->img_supple;
+            $orgMedia->img_certificate = $request->img_certificate;
+            $orgMedia->size = $request->size;
+            $orgMedia->status = $request->status;
+            $orgMedia->org_bisiness_infor_id = $request->org_bisiness_infor_id;
             $orgMedia->save();
             return response()->json([
-                'message' => 'Deleted'
+                'message' => 'Updated!'
             ], 202);
         } else {
             return response()->json([

@@ -64,9 +64,16 @@ class OrgBasicInforController extends Controller
      * @param  \App\Models\OrgBasicInfor  $orgBasicInfor
      * @return \Illuminate\Http\Response
      */
-    public function show(OrgBasicInfor $orgBasicInfor)
+    public function getOrgBasicInfor($id)
     {
-        //
+        if (OrgBasicInfor::where('id', $id)->exists()) {
+            $orgBasicInfor = OrgBasicInfor::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($orgBasicInfor, 200);
+          } else {
+            return response()->json([
+              "message" => "orgBasicInfor not found"
+            ], 404);
+          }
     }
 
     /**
