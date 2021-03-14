@@ -56,6 +56,7 @@ Route::prefix('/orgBasicInfors')->group(function () {
     Route::post('create', 'App\Http\Controllers\OrgBasicInforController@createOrgBasicInfor');
     Route::put('{id}/update', 'App\Http\Controllers\OrgBasicInforController@updateOrgBasicInfor');
     Route::delete('{id}/delete', 'App\Http\Controllers\OrgBasicInforController@deleteOrgBasicInfor');
+    Route::delete('/search', 'App\Http\Controllers\OrgBasicInforController@search');
 });
 
 Route::prefix('/orgContacts')->group(function () {

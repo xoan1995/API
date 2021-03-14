@@ -145,4 +145,11 @@ class OrgBasicInforController extends Controller
             ], 404);
         }
     }
+
+    public function search($request){
+        if($request->ajax()){
+            $orgBasicInfor= OrgBasicInfor::where('name', 'LIKE', '%'.$request->keyword.'%')->get();
+            return response()->json( $orgBasicInfor);
+        }
+    }
 }
